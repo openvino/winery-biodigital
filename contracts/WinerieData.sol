@@ -13,12 +13,12 @@ contract WineRegistry is SepoliaZamaFHEVMConfig, SepoliaZamaGatewayConfig, Gatew
     struct Wine {
         string name;
         string winerie;
-        euint64 copper;
-        euint64 lead;
-        euint64 cadmium;
-        euint64 arsenic;
-        euint64 cinc;
-        euint64 volatileAcidity;
+        euint128 copper;
+        euint128 lead;
+        euint128 cadmium;
+        euint128 arsenic;
+        euint128 cinc;
+        euint128 volatileAcidity;
         ebool isOrganic; // Indicates if the wine is organic
         string publicData; // Public metadata associated with the wine
     }
@@ -60,12 +60,12 @@ contract WineRegistry is SepoliaZamaFHEVMConfig, SepoliaZamaGatewayConfig, Gatew
         bytes calldata inputProof
     ) public {
         // Validate and convert encrypted data
-        euint64 copper = TFHE.asEuint64(copperEncrypted, inputProof);
-        euint64 lead = TFHE.asEuint64(leadEncrypted, inputProof);
-        euint64 cadmium = TFHE.asEuint64(cadmiumEncrypted, inputProof);
-        euint64 arsenic = TFHE.asEuint64(arsenicEncrypted, inputProof);
-        euint64 cinc = TFHE.asEuint64(cincEncrypted, inputProof);
-        euint64 volatileAcidity = TFHE.asEuint64(volatileAcidityEncrypted, inputProof);
+        euint128 copper = TFHE.asEuint128(copperEncrypted, inputProof);
+        euint128 lead = TFHE.asEuint128(leadEncrypted, inputProof);
+        euint128 cadmium = TFHE.asEuint128(cadmiumEncrypted, inputProof);
+        euint128 arsenic = TFHE.asEuint128(arsenicEncrypted, inputProof);
+        euint128 cinc = TFHE.asEuint128(cincEncrypted, inputProof);
+        euint128 volatileAcidity = TFHE.asEuint128(volatileAcidityEncrypted, inputProof);
 
         // Check if any chemical exceeds 100
         ebool copperExceeds = TFHE.gt(copper, 100);
@@ -120,11 +120,11 @@ contract WineRegistry is SepoliaZamaFHEVMConfig, SepoliaZamaGatewayConfig, Gatew
         view
         returns (
             string memory winerie,
-            euint64 copper,
-            euint64 lead,
-            euint64 cadmium,
-            euint64 arsenic,
-            euint64 cinc,
+            euint128 copper,
+            euint128 lead,
+            euint128 cadmium,
+            euint128 arsenic,
+            euint128 cinc,
             ebool isOrganic,
             string memory publicData
         )

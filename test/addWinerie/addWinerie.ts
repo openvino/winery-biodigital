@@ -25,7 +25,7 @@ describe("WineRegistry", function () {
     try {
       // Crea la entrada encriptada para la cantidad a incrementar
       const input = this.instances.createEncryptedInput(this.contractAddress, this.signers.alice.address);
-      input.add64(200).add64(10).add64(10).add64(10).add64(10).encrypt();
+      input.add128(200).add128(10).add128(10).add128(10).add128(10).add128(10).encrypt();
       const encryptedAmount = await input.encrypt();
 
       // Llamar a la función addWine con la cantidad encriptada
@@ -37,9 +37,12 @@ describe("WineRegistry", function () {
         encryptedAmount.handles[2],
         encryptedAmount.handles[3],
         encryptedAmount.handles[4],
+        encryptedAmount.handles[5],
         "arsenico:1-plomo:2",
         encryptedAmount.inputProof,
       );
+
+      console.log(encryptedAmount.inputProof);
 
       // Esperar a que la transacción se confirme
       await tx.wait();
